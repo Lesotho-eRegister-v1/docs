@@ -1,0 +1,41 @@
+# Upgrading to Bahmni v1
+
+### Artifacts Backup
+
+- Bahmni Configuration:
+    - No need because everything's already hosted on GitHub
+- Create a folder in the home directory and call it v1 with the following: `mkdir -p ~/v1`
+- OpenMRS Database Backup
+    - cd into the v1 folder from wherever you are in the directory with: `cd ~/v1`
+    - First, run your backup to have the latest DB of the facility being upgraded
+        - `docker exec -ti bahmni_docker_emr-service_1 bash`
+        - `cd /development` — this is done to put your DB on the /development_emr folder on the hosting system
+        - `mysqldump -u root -p openmrs&gt;openmrs_today.sql`
+        - `exit` to exit MySQL client
+        - `exit` to exit Docker CLI, back to your server CLI
+- `cd ~/v1` to make sure you're in the v1 folder
+- Clone the eRegister v1 upgrade with `git clone https://github.com/Lesotho-eRegister-v1/bahmni-docker-ls.git`
+- Clone the eRegister "bahmni_config" folder: `git clone https://github.com/Lesotho-eRegister-v1/standard-config-ls.git`
+- Create the backup folder (still inside v1) with `mkdir bahmni-backup`
+- `sudo cp /development_emropenmrs/openmrs_today.sql bahmni-backup`
+- `sudo cp -R /development_emropenmrs/bahmni_config092 bahmni-backup`
+- `mv bahmni-backup/bahmni_config092 bahmni-backup/bahmni_config`
+- Rename your DB to openmrsdb_backup.sql
+- `mv bahmni-backup/openmrs_today.sql bahmni-backup/openmrsdb_backup.sql`
+- Make sure bahmni-backup has a folder named bahmni_config and a backup file named openmrsdb_backup.sql
+- Two Step Restore:
+    - Note: To perform the upgrade, we need our instance to be running on MySQL 8 to take advantage of the enhanced security features. But to do that, we need to start with restoring our backup to MySQL 5.7 since it was running on 5.7.30 on eRegister 0.92.
+    - Let the restore run for a while. It's going to take some time, obviously, with varying ETAs based on the size of the DB.
+    - After the backup has been restored, log in to the system and test that you can search for a client on the Registration module.
+    - Then stop your instance and change the image to MySQL 8
+- `cd ~/v1/openmrs/bahmni-docker-ls/bahmni-standard`
+- Edit the .env to `OPENMRS_DB_IMAGE_NAME=mysql:5.7` and `REPORTS_DB_IMAGE_NAME=mysql:5.7`
+- Run `./restore_bahmni_standard.sh /home/openmrs/v1/bahmni-backup`
+- `./run-bahmni.sh`
+- After testing that the restore went well, you can shut down the instance by running `./run-bahmni.sh` and choosing option (2)
+- Edit the .env to `OPENMRS_DB_IMAGE_NAME=mysql:8.0` and `REPORTS_DB_IMAGE_NAME=mysql:8.0`
+- Restart your containers
+
+### Security Enhancements
+
+- [MySQL enhancements from MySQL 8](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password)
