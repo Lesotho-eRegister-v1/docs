@@ -36,6 +36,25 @@
 - Edit the .env to `OPENMRS_DB_IMAGE_NAME=mysql:8.0` and `REPORTS_DB_IMAGE_NAME=mysql:8.0`
 - Restart your containers
 
-### Security Enhancements
+### **Harmonizing the Concept Dictionary**
+
+We need to make sure that the concept dictionary is standardadized by following the steps below:
+
+!!! warning
+    * Just a temporary guide
+----------------------------------------------------------------------------------
+
+1. ssh into your server with `ssh openmrs@server_ip` and then enter the server the password when prompted
+2. Make sure you're in the home folder with `cd ~`
+3. clone the concepts folder by running `sudo git clone https://github.com/Lesotho-eRegister-v1/eregister_concepts_release_v1.git`
+4. Get into the Concepts folder with `cd eregister_concepts_release_v1.sql`
+5. Copy the concepts file into the container with `docker cp omrs_concept_dictionary_v1.sql bahmni-standard-openmrsdb-1:/`
+6. Get into your container cli with `docker exec -it bahmni-standard-openmrsdb-1 bash`
+7. CD to the root folder with `cd /`
+8. Get into your MySQL server by running `mysql -u root -p`
+9. Choose your db `use openmrs`
+10. Import the latest concepts with `source eregister_concepts_release_v1.sql`
+
+### **Security Enhancements**
 
 - [MySQL enhancements from MySQL 8](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password)
