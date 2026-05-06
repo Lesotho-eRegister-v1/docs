@@ -29,11 +29,10 @@
     - After the backup has been restored, log in to the system and test that you can search for a client on the Registration module.
     - Then stop your instance and change the image to MySQL 8
 - `cd ~/v1/openmrs/bahmni-docker-ls/bahmni-standard`
-- Edit the .env to `OPENMRS_DB_IMAGE_NAME=mysql:5.7` and `REPORTS_DB_IMAGE_NAME=mysql:5.7`
+- Edit the .env to `OPENMRS_DB_IMAGE_NAME=bahmni/openmrs-db:1.0.0-standard` and `REPORTS_DB_IMAGE_NAME=mysql:8.0`
 - Run `./restore_bahmni_standard.sh /home/openmrs/v1/bahmni-backup`
 - `./run-bahmni.sh`
 - After testing that the restore went well, you can shut down the instance by running `./run-bahmni.sh` and choosing option (2)
-- Edit the .env to `OPENMRS_DB_IMAGE_NAME=mysql:8.0` and `REPORTS_DB_IMAGE_NAME=mysql:8.0`
 - Restart your containers
 
 ### **Harmonizing the Concept Dictionary**
