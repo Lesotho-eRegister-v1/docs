@@ -3,6 +3,10 @@
 
 ### **Latest Way to Migrate to v1**
 
+Go to this repo and follow the instructions there: [https://github.com/eRegister/upgrade-to-v1](https://github.com/eRegister/upgrade-to-v1)
+
+OR 
+
 Just ssh into your server, then copy and paste this line below:
 
 ```bash
@@ -15,7 +19,7 @@ An example of how to use flags below:
 curl -fsSL https://raw.githubusercontent.com/eRegister/upgrade-to-v1/refs/heads/main/install.sh | bash -s -- --force --yes
 ```
 
-!!! warning
+!!! note
     * The guide below will be kept to help maintain the automation script
 ----------------------------------------------------------------------------------
 
