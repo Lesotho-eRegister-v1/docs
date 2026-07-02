@@ -1,6 +1,26 @@
 # Upgrading to Bahmni v1
 
-### Artifacts Backup
+
+### **Latest Way to Migrate to v1**
+
+Just ssh into your server, then copy and paste this line below:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/eRegister/upgrade-to-v1/refs/heads/main/install.sh | bash
+```
+
+An example of how to use flags below:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/eRegister/upgrade-to-v1/refs/heads/main/install.sh | bash -s -- --force --yes
+```
+
+!!! warning
+    * The guide below will be kept to help maintain the automation script
+----------------------------------------------------------------------------------
+
+
+### **Artifacts Backup**
 
 - Bahmni Configuration:
     - No need because everything's already hosted on GitHub
@@ -38,10 +58,6 @@
 ### **Harmonizing the Concept Dictionary**
 
 We need to make sure that the concept dictionary is standardadized by following the steps below:
-
-!!! warning
-    * Just a temporary guide
-----------------------------------------------------------------------------------
 
 1. ssh into your server with `ssh openmrs@server_ip` and then enter the server the password when prompted
 2. Make sure you're in the home folder with `cd ~`
