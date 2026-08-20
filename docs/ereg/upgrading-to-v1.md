@@ -23,7 +23,7 @@ curl -fsSL https://raw.githubusercontent.com/eRegister/upgrade-to-v1/refs/heads/
     * The guide below will be kept to help maintain the automation script
 ----------------------------------------------------------------------------------
 
-### **Artifacts Backup**
+### **Lab Integration Configs**
 
 Just make sure that the "OpenELIS Pull Task"  is active to enable OpenMRS to pull results. 
 
