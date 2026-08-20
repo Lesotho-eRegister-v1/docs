@@ -23,8 +23,14 @@ curl -fsSL https://raw.githubusercontent.com/eRegister/upgrade-to-v1/refs/heads/
     * The guide below will be kept to help maintain the automation script
 ----------------------------------------------------------------------------------
 
-
 ### **Artifacts Backup**
+
+Just make sure that the "OpenELIS Pull Task"  is active to enable OpenMRS to pull results. 
+
+![lab_results_diagram](../pics/lab_results.png )
+
+
+### **Artifacts Backup | <<OLD Content>> **
 
 - Bahmni Configuration:
     - No need because everything's already hosted on GitHub
